@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/nav_calls" android:icon="@android:drawable/ic_menu_call" android:title="Calls"/>
+    <item android:id="@+id/nav_dial" android:icon="@drawable/baseline_dialpad_24" android:title="Dial"/>
+    <item android:id="@+id/nav_sms" android:icon="@android:drawable/ic_dialog_email" android:title="SMS"/>
+    <item android:id="@+id/nav_settings" android:icon="@android:drawable/ic_menu_preferences" android:title="Settings"/>
+</menu>
