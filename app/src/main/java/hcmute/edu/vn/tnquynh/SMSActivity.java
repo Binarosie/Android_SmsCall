@@ -1,23 +1,42 @@
 package hcmute.edu.vn.tnquynh;
 
 import android.os.Bundle;
-
-import androidx.activity.EdgeToEdge;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SMSActivity extends AppCompatActivity {
+    private RecyclerView recyclerView;
+    private MessageAdapter adapter;
+    private List<String> messages;
+    private EditText etMessage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_sms);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.sms), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+
+        recyclerView = findViewById(R.id.recyclerViewMessages);
+        etMessage = findViewById(R.id.etMessage);
+        ImageView btnSend = findViewById(R.id.btnSend);
+
+        messages = new ArrayList<>();
+        adapter = new MessageAdapter(messages);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
+
+        btnSend.setOnClickListener(v -> {
+            String message = etMessage.getText().toString().trim();
+            if (!message.isEmpty()) {
+                messages.add(message);
+                adapter.notifyItemInserted(messages.size() - 1);
+                etMessage.setText("");
+            }
         });
     }
 }
