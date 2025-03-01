@@ -17,3 +17,7 @@
 
 6. Giao diện Incoming Calls
 ![image](https://github.com/user-attachments/assets/c2d880d9-3e64-4b6f-ae2f-ed2c41700769)
+
+7. Giao diện Out-going Calls
+![image](https://github.com/user-attachments/assets/5c746911-bee6-4f9b-909e-9d52fe565649)
+
