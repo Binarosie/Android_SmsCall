@@ -1,41 +1,41 @@
 package hcmute.edu.vn.tnquynh;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import java.util.ArrayList;
-import java.util.List;
+import androidx.appcompat.widget.Toolbar;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class SMSActivity extends AppCompatActivity {
-    private RecyclerView recyclerView;
-    private MessageAdapter adapter;
-    private List<String> messages;
-    private EditText etMessage;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sms);
 
-        recyclerView = findViewById(R.id.recyclerViewMessages);
-        etMessage = findViewById(R.id.etMessage);
-        ImageView btnSend = findViewById(R.id.btnSend);
+        // Ánh xạ Toolbar từ layout
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-        messages = new ArrayList<>();
-        adapter = new MessageAdapter(messages);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter);
+        // Bật nút quay về (Back button)
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
-        btnSend.setOnClickListener(v -> {
-            String message = etMessage.getText().toString().trim();
-            if (!message.isEmpty()) {
-                messages.add(message);
-                adapter.notifyItemInserted(messages.size() - 1);
-                etMessage.setText("");
+        // Xử lý sự kiện khi bấm vào nút quay về
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish(); // Đóng Activity và quay về MainActivity
+            }
+        });
+        FloatingActionButton fabAdd = findViewById(R.id.fabAdd);
+        fabAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SMSActivity.this, NewMessageActivity.class);
+                startActivity(intent);
             }
         });
     }

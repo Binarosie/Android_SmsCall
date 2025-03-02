@@ -2,8 +2,11 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="brown">#442C2E</color>
+    <color name="blink">#FEEAE6</color>
+
     <color name="nav_item_color">#D32F2F</color>
     <color name="purple_500">#fedbd0</color>
     <color name="btn900">#442c2e</color>
-    <color name="secondary">#feeae6</color>
+    <color name="secondary">#FAEBE8</color>
 </resources>

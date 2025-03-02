@@ -5,38 +5,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/calls"
-    android:background="@color/purple_500"
+    android:background="#8FF2D7CF"
     android:padding="16dp">
 
-    <!-- Tên người gọi -->
+
     <TextView
         android:id="@+id/tvCallerName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:gravity="center"
         android:text="Your Name"
-        android:textSize="24sp"
         android:textColor="@color/btn900"
+        android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:gravity="center"/>
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Trạng thái cuộc gọi -->
     <TextView
         android:id="@+id/tvCallStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Calling..."
-        android:textSize="16sp"
-        android:textColor="@color/btn900"
-        app:layout_constraintTop_toBottomOf="@id/tvCallerName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="36dp"
         android:gravity="center"
-        android:layout_marginTop="8dp"/>
+        android:text="Calling..."
+        android:textColor="@color/btn900"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvCallerName" />
 
-    <!-- Nút "Remind Me" -->
     <LinearLayout
         android:id="@+id/btnRemindMe"
         android:layout_width="wrap_content"
@@ -53,7 +53,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@android:drawable/ic_popup_reminder"
-            app:tint="@color/secondary"/>
+            app:tint="@color/btn900"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -81,7 +81,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@android:drawable/ic_dialog_email"
-            app:tint="@color/secondary"/>
+            app:tint="@color/brown"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -106,6 +106,7 @@
         android:layout_marginBottom="30dp">
 
         <ImageView
+            android:id="@+id/btnEndCall"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@android:drawable/ic_menu_call"
