@@ -35,7 +35,7 @@
 
         <!-- Các Activity trong ứng dụng -->
         <activity
-            android:name=".MainActivity"
+            android:name=".controller.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -45,15 +45,22 @@
 
         <activity android:name=".SMSActivity" android:exported="false"/>
         <activity android:name=".NewMessageActivity" android:exported="false"/>
-        <activity android:name=".SettingsActivity" android:exported="false"/>
-        <activity android:name=".CallsActivity" android:exported="false"/>
+        <activity android:name=".controller.SettingsActivity" android:exported="false"/>
 
         <!-- Đăng ký BroadcastReceiver để nhận SMS -->
-        <receiver android:name=".MySmsReceiver" android:exported="true" android:permission="android.permission.BROADCAST_SMS">
+        <receiver android:name=".service.MySmsReceiver" android:exported="true" android:permission="android.permission.BROADCAST_SMS">
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
             </intent-filter>
         </receiver>
+
+        <service
+            android:name=".service.CallService"
+            android:exported="false" />
+
+        <service
+            android:name=".service.CallStateService"
+            android:exported="false"/>
 
     </application>
 </manifest>

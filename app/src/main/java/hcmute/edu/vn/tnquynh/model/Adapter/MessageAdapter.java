@@ -1,4 +1,4 @@
-package hcmute.edu.vn.tnquynh;
+package hcmute.edu.vn.tnquynh.model.Adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import hcmute.edu.vn.tnquynh.R;
 import hcmute.edu.vn.tnquynh.model.MessageModel;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder> {

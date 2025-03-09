@@ -17,7 +17,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
 
+import hcmute.edu.vn.tnquynh.model.Adapter.MessageAdapter;
 import hcmute.edu.vn.tnquynh.model.MessageModel;
+import hcmute.edu.vn.tnquynh.service.MySmsReceiver;
 
 public class SMSActivity extends AppCompatActivity {
 

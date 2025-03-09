@@ -1,9 +1,7 @@
-package hcmute.edu.vn.tnquynh;
-
+package hcmute.edu.vn.tnquynh.controller;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.EditText;
@@ -19,45 +17,51 @@ import androidx.core.app.ActivityCompat;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
 
+import hcmute.edu.vn.tnquynh.R;
+import hcmute.edu.vn.tnquynh.SMSActivity;
+import hcmute.edu.vn.tnquynh.service.CallService;
+
 public class MainActivity extends AppCompatActivity {
 
-    private EditText etPhoneNumber;
-
-    private StringBuilder phoneNumber = new StringBuilder();
-
-    private BottomNavigationView bottomNavigationView;
-
-    private ImageButton btnConfirm, btnCall;
-
-    private static final int REQUEST_CALL_PHONE = 1;
+    // Khai báo các thành phần giao diện
+    private EditText etPhoneNumber; // Ô nhập số điện thoại
+    private StringBuilder phoneNumber = new StringBuilder(); // Chuỗi chứa số điện thoại nhập vào
+    private BottomNavigationView bottomNavigationView; // Thanh điều hướng
+    private ImageButton btnConfirm; // Nút gọi
+    private static final int REQUEST_CALL_PHONE = 1; // Hằng số yêu cầu quyền gọi điện
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
+        EdgeToEdge.enable(this); // Kích hoạt chế độ giao diện toàn màn hình
+        setContentView(R.layout.activity_main); // Gán layout cho Activity
 
+        // Ánh xạ các thành phần từ giao diện XML vào biến Java
         etPhoneNumber = findViewById(R.id.etPhoneNumber);
         bottomNavigationView = findViewById(R.id.bottomNavigation);
-        btnConfirm = findViewById(R.id.btnCall); // Ánh xạ btnConfirm
+        btnConfirm = findViewById(R.id.btnCall);
+
         // Đặt icon mặc định là "Dial" khi mở ứng dụng
         bottomNavigationView.setSelectedItemId(R.id.nav_dial);
 
+        // Xử lý khi chọn các mục trong thanh điều hướng
         bottomNavigationView.setOnItemSelectedListener(item -> {
             if (item.getItemId() == R.id.nav_sms) {
+                // Mở màn hình nhắn tin (SMSActivity)
                 startActivity(new Intent(MainActivity.this, SMSActivity.class));
                 return true;
             } else if (item.getItemId() == R.id.nav_history) {
+                // Mở màn hình lịch sử (SettingsActivity)
                 startActivity(new Intent(MainActivity.this, SettingsActivity.class));
                 return true;
             }
             return true;
         });
 
-
-        setButtonListeners();
+        setButtonListeners(); // Thiết lập sự kiện cho các nút số và nút gọi
     }
 
+    // Gán sự kiện cho các nút bấm số và nút gọi
     private void setButtonListeners() {
         int[] buttonIds = {
                 R.id.btn0, R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4,
@@ -69,35 +73,40 @@ public class MainActivity extends AppCompatActivity {
             MaterialButton button = findViewById(id);
             button.setOnClickListener(v -> {
                 String text = button.getText().toString();
-                addNumber(text);
+                addNumber(text); // Gọi phương thức để thêm số vào ô nhập liệu
             });
         }
 
-        // Xử lý nút gọi (giả lập cuộc gọi)
+        // Xử lý khi bấm nút gọi
         btnConfirm.setOnClickListener(v -> makeCall());
     }
 
+    // Thêm số vào ô nhập liệu
     private void addNumber(String number) {
-        if (phoneNumber.length() < 15) { // Giới hạn 15 ký tự như số điện thoại
+        if (phoneNumber.length() < 15) { // Giới hạn tối đa 15 ký tự
             phoneNumber.append(number);
             etPhoneNumber.setText(phoneNumber.toString());
         }
     }
 
+    // Xử lý cuộc gọi
     private void makeCall() {
-        String phone = etPhoneNumber.getText().toString().trim();
+        String phone = etPhoneNumber.getText().toString().trim(); // Lấy số điện thoại nhập vào
 
-        if (TextUtils.isEmpty(phone)) {
+        if (TextUtils.isEmpty(phone)) { // Kiểm tra nếu chưa nhập số
             Toast.makeText(this, "Vui lòng nhập số điện thoại!", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        Intent callIntent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phone));
-
+        // Kiểm tra quyền gọi điện thoại
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            // Nếu chưa có quyền, yêu cầu cấp quyền
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_CALL_PHONE);
         } else {
-            startActivity(callIntent);
+            // Nếu đã có quyền, gọi CallService để thực hiện cuộc gọi
+            Intent intent = new Intent(this, CallService.class);
+            intent.putExtra("phoneNumber", phone);
+            startService(intent);
         }
     }
 
@@ -108,19 +117,19 @@ public class MainActivity extends AppCompatActivity {
 
         if (requestCode == REQUEST_CALL_PHONE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                makeCall();  // Gọi lại hàm gọi điện sau khi có quyền
+                // Nếu quyền được cấp, thực hiện cuộc gọi
+                makeCall();
             } else {
+                // Nếu quyền bị từ chối, hiển thị thông báo
                 Toast.makeText(this, "Quyền gọi điện bị từ chối!", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
+    // Khi quay lại màn hình chính, đặt lại biểu tượng điều hướng về "Dial"
     @Override
     protected void onResume() {
         super.onResume();
-        // Đặt lại icon khi quay về MainActivity
         bottomNavigationView.setSelectedItemId(R.id.nav_dial);
     }
 }
-
-

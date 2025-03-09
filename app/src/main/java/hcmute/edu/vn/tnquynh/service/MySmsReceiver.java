@@ -1,4 +1,4 @@
-package hcmute.edu.vn.tnquynh;
+package hcmute.edu.vn.tnquynh.service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
