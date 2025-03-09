@@ -1,6 +1,8 @@
 1. Giao diện Main 
 
-![image](https://github.com/user-attachments/assets/c69cd1a8-f448-4bc0-b6e5-6c5f09417644)
+![image](https://github.com/user-attachments/assets/865730ca-8793-4e58-8869-449b084bf26f)
+
+![image](https://github.com/user-attachments/assets/9e26d6e1-b106-45ef-a03a-3e0661b49686)
 
 
 2. Giao diện Sms list
@@ -17,9 +19,12 @@
 
 4. Giao diện Incoming Calls
 
-![image](https://github.com/user-attachments/assets/07b753cd-ba61-4dbc-99c5-3d7aa6702cc4)
+![image](https://github.com/user-attachments/assets/8a0a02bc-2696-4d6e-a3c1-7852bc1cd1ee)
 
-5. Giao diện Out-going Calls
+5. Thông báo kkhi có tin nhắn đến
 
-![image](https://github.com/user-attachments/assets/5c746911-bee6-4f9b-909e-9d52fe565649)
+![image](https://github.com/user-attachments/assets/b1593beb-8e0e-492f-b717-a8e22292ed75)
+
+
+
 
